@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+mysql-connector-python
+router
+python-dotenv
+pyjwt
+python-jose[cryptography]
+pytest

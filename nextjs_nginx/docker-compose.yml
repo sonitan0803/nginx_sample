@@ -1,0 +1,41 @@
+version: "3.0"
+
+services:
+    nextjs:
+        image: nextjs_image
+        container_name: nextjs_containe
+        build:
+            context: .
+            dockerfile: ./next_sample/Dockerfile
+        networks:
+            - my_network
+
+    fastapi:
+        image: fastapi_image
+        container_name: fastapi_container
+        build: ./fastapi_sample
+        networks:
+            - my_network
+
+    nginx:
+        image: nginx_image
+        container_name: nginx_container
+        build:
+            context: .
+            dockerfile: ./nginx/Dockerfile
+        ports:
+            - "80:80"
+            - "81:81"
+            - "443:443"
+        depends_on:
+            - nextjs
+            - fastapi
+        networks:
+            - my_network
+            - frontend # 外部アクセス用のネットワーク
+
+networks:
+    my_network:
+        driver: bridge
+    frontend:
+        driver: bridge
