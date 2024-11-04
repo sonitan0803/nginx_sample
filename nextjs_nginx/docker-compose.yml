@@ -32,10 +32,7 @@ services:
             - fastapi
         networks:
             - my_network
-            - frontend # 外部アクセス用のネットワーク
 
 networks:
     my_network:
-        driver: bridge
-    frontend:
         driver: bridge
